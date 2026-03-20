@@ -1,5 +1,7 @@
 package com.cesar.task_manager_api.entity;
 
+import java.util.Objects;
+
 import com.cesar.task_manager_api.enums.Priority;
 
 import jakarta.persistence.Column;
@@ -28,7 +30,7 @@ public class Task {
 	
 	@Enumerated(EnumType.STRING)
     @Column(nullable = false)
-	Priority priority;
+	private Priority priority;
 	
 	public Task() {
 	}
@@ -71,6 +73,40 @@ public class Task {
 
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
+	}
+	
+	public Priority getPriority() {
+	    return priority;
+	}
+
+	public void setPriority(Priority priority) {
+	    this.priority = priority;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Task other = (Task) obj;
+		return Objects.equals(id, other.id);
+	}
+
+
+	@Override
+	public String toString() {
+		return "Task [id=" + id + ", title=" + title + ", description=" + description + ", completed=" + completed
+				+ ", priority=" + priority + "]";
 	}
 	
 	
