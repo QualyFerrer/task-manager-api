@@ -1,8 +1,8 @@
-package com.cesar.task_manager_api.entity;
+package com.cesar.task.entity;
 
 import java.util.Objects;
 
-import com.cesar.task_manager_api.enums.Priority;
+import com.cesar.task.enums.Priority;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

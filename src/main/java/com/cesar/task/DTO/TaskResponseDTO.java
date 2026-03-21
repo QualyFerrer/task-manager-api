@@ -1,7 +1,7 @@
-package com.cesar.task_manager_api.DTO;
+package com.cesar.task.DTO;
 
-import com.cesar.task_manager_api.entity.Task;
-import com.cesar.task_manager_api.enums.Priority;
+import com.cesar.task.entity.Task;
+import com.cesar.task.enums.Priority;
 
 import lombok.Data;
 

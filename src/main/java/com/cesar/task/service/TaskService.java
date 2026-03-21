@@ -1,4 +1,4 @@
-package com.cesar.task_manager_api.service;
+package com.cesar.task.service;
 
 import java.util.List;
 import java.util.stream.Collector;
@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.cesar.task_manager_api.DTO.TaskRequestDTO;
-import com.cesar.task_manager_api.DTO.TaskResponseDTO;
-import com.cesar.task_manager_api.entity.Task;
-import com.cesar.task_manager_api.enums.Priority;
-import com.cesar.task_manager_api.repository.TaskRepository;
+import com.cesar.task.DTO.TaskRequestDTO;
+import com.cesar.task.DTO.TaskResponseDTO;
+import com.cesar.task.entity.Task;
+import com.cesar.task.enums.Priority;
+import com.cesar.task.repository.TaskRepository;
 
 @Service
 public class TaskService {
