@@ -36,11 +36,12 @@ public class Task {
 	}
 	
 	
-	public Task(Long id, String title, String description, Boolean completed) {
+	public Task(Long id, String title, String description, Boolean completed, Priority priority) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.completed = completed;
+		this.priority = priority;
 	}
 
 	public Long getId() {
