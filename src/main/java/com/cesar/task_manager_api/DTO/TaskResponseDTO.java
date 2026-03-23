@@ -3,7 +3,6 @@ package com.cesar.task_manager_api.dto;
 import com.cesar.task_manager_api.entity.Task;
 import com.cesar.task_manager_api.enums.Priority;
 
-import lombok.Data;
 
 public class TaskResponseDto {
 
