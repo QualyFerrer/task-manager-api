@@ -1,4 +1,4 @@
-package com.cesar.task.enums;
+package com.cesar.task_manager_api.enums;
 
 public enum Priority {
 
