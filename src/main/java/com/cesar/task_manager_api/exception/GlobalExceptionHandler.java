@@ -1,6 +1,5 @@
 package com.cesar.task_manager_api.exception;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
