@@ -2,6 +2,8 @@ package com.cesar.task_manager_api.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,10 +43,9 @@ public class TaskController {
 
 	// GET /tasks
 	@GetMapping
-	public ResponseEntity<List<TaskResponseDto>> findAll() {
-		return ResponseEntity.ok(taskService.findAll());
+	public ResponseEntity<Page<TaskResponseDto>> findAll(Pageable pageable) {
+	    return ResponseEntity.ok(taskService.findAll(pageable));
 	}
-
 	// GET /tasks/{id}
 	@GetMapping("/{id}")
 	public ResponseEntity<TaskResponseDto> findById(@PathVariable Long id) {

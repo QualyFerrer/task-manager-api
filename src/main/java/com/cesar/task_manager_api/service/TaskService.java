@@ -3,6 +3,8 @@ package com.cesar.task_manager_api.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cesar.task_manager_api.dto.TaskRequestDto;
@@ -33,11 +35,9 @@ public class TaskService {
     	return TaskResponseDto.fromEntity(saved);
     }
     
-    public List<TaskResponseDto> findAll(){
-    	return taskRepository.findAll()
-    			.stream()
-    			.map(TaskResponseDto::fromEntity)
-    			.collect(Collectors.toList());
+    public Page<TaskResponseDto> findAll(Pageable pageable) {
+        return taskRepository.findAll(pageable)
+                .map(TaskResponseDto::fromEntity);
     }
     
     public TaskResponseDto findById(Long id) {
