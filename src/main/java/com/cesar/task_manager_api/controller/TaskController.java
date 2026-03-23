@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cesar.task_manager_api.DTO.TaskRequestDTO;
-import com.cesar.task_manager_api.DTO.TaskResponseDTO;
+import com.cesar.task_manager_api.dto.TaskRequestDto;
+import com.cesar.task_manager_api.dto.TaskResponseDto;
 import com.cesar.task_manager_api.enums.Priority;
 import com.cesar.task_manager_api.service.TaskService;
 
@@ -34,32 +34,32 @@ public class TaskController {
 
 	// POST /tasks
 	@PostMapping
-	public ResponseEntity<TaskResponseDTO> create(@RequestBody @Valid TaskRequestDTO dto) {
-		TaskResponseDTO response = taskService.create(dto);
+	public ResponseEntity<TaskResponseDto> create(@RequestBody @Valid TaskRequestDto dto) {
+		TaskResponseDto response = taskService.create(dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
 	// GET /tasks
 	@GetMapping
-	public ResponseEntity<List<TaskResponseDTO>> findAll() {
+	public ResponseEntity<List<TaskResponseDto>> findAll() {
 		return ResponseEntity.ok(taskService.findAll());
 	}
 
 	// GET /tasks/{id}
 	@GetMapping("/{id}")
-	public ResponseEntity<TaskResponseDTO> findById(@PathVariable Long id) {
+	public ResponseEntity<TaskResponseDto> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(taskService.findById(id));
 	}
 
 	// PUT /tasks/{id}
 	@PutMapping("/{id}")
-	public ResponseEntity<TaskResponseDTO> update(@PathVariable Long id, @RequestBody @Valid TaskRequestDTO dto) {
+	public ResponseEntity<TaskResponseDto> update(@PathVariable Long id, @RequestBody @Valid TaskRequestDto dto) {
 		return ResponseEntity.ok(taskService.update(id, dto));
 	}
 
 	// PATCH /tasks/{id}/complete
 	@PatchMapping("/{id}/complete")
-	public ResponseEntity<TaskResponseDTO> complete(@PathVariable Long id) {
+	public ResponseEntity<TaskResponseDto> complete(@PathVariable Long id) {
 		return ResponseEntity.ok(taskService.complete(id));
 	}
 
@@ -72,19 +72,19 @@ public class TaskController {
 
 	// GET /tasks/priority?level=HIGH
 	@GetMapping("/priority")
-	public ResponseEntity<List<TaskResponseDTO>> findByPriority(@RequestParam Priority level) {
+	public ResponseEntity<List<TaskResponseDto>> findByPriority(@RequestParam Priority level) {
 		return ResponseEntity.ok(taskService.findByPriority(level));
 	}
 
 	// GET /tasks/pending
 	@GetMapping("/pending")
-	public ResponseEntity<List<TaskResponseDTO>> findPending() {
+	public ResponseEntity<List<TaskResponseDto>> findPending() {
 		return ResponseEntity.ok(taskService.findPending());
 	}
 
 	// GET /tasks/search?title=study
 	@GetMapping("/search")
-	public ResponseEntity<List<TaskResponseDTO>> searchByTitle(@RequestParam String title) {
+	public ResponseEntity<List<TaskResponseDto>> searchByTitle(@RequestParam String title) {
 		return ResponseEntity.ok(taskService.searchByTitle(title));
 	}
 

@@ -1,15 +1,16 @@
 package com.cesar.task_manager_api.service;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.cesar.task_manager_api.DTO.TaskRequestDTO;
-import com.cesar.task_manager_api.DTO.TaskResponseDTO;
+import com.cesar.task_manager_api.dto.TaskRequestDto;
+import com.cesar.task_manager_api.dto.TaskResponseDto;
 import com.cesar.task_manager_api.entity.Task;
 import com.cesar.task_manager_api.enums.Priority;
+import com.cesar.task_manager_api.exception.BusinessException;
+import com.cesar.task_manager_api.exception.TaskNotFoundException;
 import com.cesar.task_manager_api.repository.TaskRepository;
 
 @Service
@@ -21,7 +22,7 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
     
-    public TaskResponseDTO create (TaskRequestDTO dto ) {
+    public TaskResponseDto create (TaskRequestDto dto ) {
     	Task task = new Task();
     	task.setTitle(dto.getTitle());
     	task.setDescription(dto.getDescription());
@@ -29,72 +30,72 @@ public class TaskService {
     	task.setCompleted(false);
     	
     	Task saved = taskRepository.save(task);
-    	return TaskResponseDTO.fromEntity(saved);
+    	return TaskResponseDto.fromEntity(saved);
     }
     
-    public List<TaskResponseDTO> findAll(){
+    public List<TaskResponseDto> findAll(){
     	return taskRepository.findAll()
     			.stream()
-    			.map(TaskResponseDTO::fromEntity)
+    			.map(TaskResponseDto::fromEntity)
     			.collect(Collectors.toList());
     }
     
-    public TaskResponseDTO findById(Long id) {
+    public TaskResponseDto findById(Long id) {
     	Task task = taskRepository.findById(id)
-    			.orElseThrow(() -> new RuntimeException("Task not found with id: " + id));
-    	  		return TaskResponseDTO.fromEntity(task);
+    			.orElseThrow(() -> new TaskNotFoundException(id));
+    	  		return TaskResponseDto.fromEntity(task);
     }
     
-    public TaskResponseDTO update(Long id, TaskRequestDTO dto) {
+    public TaskResponseDto update(Long id, TaskRequestDto dto) {
     	Task task = taskRepository.findById(id)
-    			.orElseThrow(() -> new RuntimeException("Task not found with id: " + id));
+    			.orElseThrow(() -> new TaskNotFoundException(id));
     	
     	task.setTitle(dto.getTitle());
     	task.setDescription(dto.getDescription());
     	task.setPriority(dto.getPriority());
     	
     	Task updated = taskRepository.save(task);
-    	return TaskResponseDTO.fromEntity(updated);
+    	return TaskResponseDto.fromEntity(updated);
     }
     
-    public TaskResponseDTO complete (Long id) {
+    public TaskResponseDto complete (Long id) {
     	Task task = taskRepository.findById(id)
-    			.orElseThrow(()  -> new RuntimeException("Task not found with id: " + id));
+    			.orElseThrow(()  -> new TaskNotFoundException(id));
     	
     	if(task.getCompleted()) {
-    		throw new RuntimeException("Task is already completed");
+    		throw new BusinessException("Task is already completed");
     	}
     	
-    	task.getCompleted();
+    	task.setCompleted(true);
     	
-    	return TaskResponseDTO.fromEntity(taskRepository.save(task));	
+    	return TaskResponseDto.fromEntity(taskRepository.save(task));	
     }
     
     public void delete(Long id) {
     	if(!taskRepository.existsById(id)) {
-    		throw new RuntimeException("Task not found with id: " + id);
+    		throw new  TaskNotFoundException(id);
     	}
     	taskRepository.deleteById(id);
     }
     
-    public List<TaskResponseDTO> findByPriority(Priority priority){
+    public List<TaskResponseDto> findByPriority(Priority priority){
     	return taskRepository.findByPriority(priority)
     			.stream()
-    			.map(TaskResponseDTO::fromEntity)
+    			.map(TaskResponseDto::fromEntity)
     			.collect(Collectors.toList());
     }
     
-    public List<TaskResponseDTO> findPending(){
+    public List<TaskResponseDto> findPending(){
     	return taskRepository.findByCompleted(false)
     			.stream()
-    			.map(TaskResponseDTO::fromEntity)
+    			.map(TaskResponseDto::fromEntity)
     			.collect(Collectors.toList()); 	
     }
     
-    public List<TaskResponseDTO> searchByTitle(String title){
+    public List<TaskResponseDto> searchByTitle(String title){
     	return taskRepository.findByTitleContainingIgnoreCase(title)
     			.stream()
-    			.map(TaskResponseDTO::fromEntity)
+    			.map(TaskResponseDto::fromEntity)
     			.collect(Collectors.toList());
     	}
 }

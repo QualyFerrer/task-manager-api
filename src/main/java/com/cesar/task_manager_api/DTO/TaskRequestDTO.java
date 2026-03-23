@@ -1,4 +1,4 @@
-package com.cesar.task_manager_api.DTO;
+package com.cesar.task_manager_api.dto;
 
 import com.cesar.task_manager_api.enums.Priority;
 
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class TaskRequestDTO {
+public class TaskRequestDto {
 
 	@NotBlank(message = "Title is required")
 	@Size(max = 100)

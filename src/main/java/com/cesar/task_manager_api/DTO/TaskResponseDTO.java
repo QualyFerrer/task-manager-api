@@ -1,11 +1,11 @@
-package com.cesar.task_manager_api.DTO;
+package com.cesar.task_manager_api.dto;
 
 import com.cesar.task_manager_api.entity.Task;
 import com.cesar.task_manager_api.enums.Priority;
 
 import lombok.Data;
 
-public class TaskResponseDTO {
+public class TaskResponseDto {
 
 	private Long id;
 	private String title;
@@ -53,8 +53,8 @@ public class TaskResponseDTO {
 		this.priority = priority;
 	}
 
-	public static TaskResponseDTO fromEntity(Task task) {
-		TaskResponseDTO dto = new TaskResponseDTO();
+	public static TaskResponseDto fromEntity(Task task) {
+		TaskResponseDto dto = new TaskResponseDto();
 		dto.setId(task.getId());
 		dto.setTitle(task.getTitle());
 		dto.setDescription(task.getDescription());
