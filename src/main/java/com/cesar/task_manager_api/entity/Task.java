@@ -17,7 +17,6 @@ import jakarta.persistence.Table;
 @Table(name = "tb_tasks")
 public class Task {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -27,15 +26,14 @@ public class Task {
 	private String description;
 	@Column(nullable = false)
 	private Boolean completed;
-	
+
 	@Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+	@Column(nullable = false)
 	private Priority priority;
-	
+
 	public Task() {
 	}
-	
-	
+
 	public Task(Long id, String title, String description, Boolean completed, Priority priority) {
 		this.id = id;
 		this.title = title;
@@ -75,21 +73,19 @@ public class Task {
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
-	
+
 	public Priority getPriority() {
-	    return priority;
+		return priority;
 	}
 
 	public void setPriority(Priority priority) {
-	    this.priority = priority;
+		this.priority = priority;
 	}
-
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -103,13 +99,10 @@ public class Task {
 		return Objects.equals(id, other.id);
 	}
 
-
 	@Override
 	public String toString() {
 		return "Task [id=" + id + ", title=" + title + ", description=" + description + ", completed=" + completed
 				+ ", priority=" + priority + "]";
 	}
-	
-	
-	
+
 }

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class DataLoader {
 
     @Bean
-    public CommandLineRunner loadData(TaskRepository taskRepository) {
+    CommandLineRunner loadData(TaskRepository taskRepository) {
         return args -> {
 
             Task task1 = new Task();

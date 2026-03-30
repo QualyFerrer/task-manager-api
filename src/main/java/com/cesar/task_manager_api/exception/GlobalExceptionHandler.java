@@ -42,9 +42,9 @@ public class GlobalExceptionHandler {
 	    return ResponseEntity.badRequest().body(errorResponse);
 	}
 	
-	/*@ExceptionHandler
+	@ExceptionHandler
 	public ResponseEntity<ErrorResponse> handleGeneric(Exception ex){
 		ErrorResponse error = new ErrorResponse("Internal Server Error", 500);
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
-	}*/
+	}
 }
