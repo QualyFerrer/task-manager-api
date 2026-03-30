@@ -103,4 +103,30 @@ class TaskServiceTest {
 		// Assert + Act
 		assertThatThrownBy(() -> taskService.delete(99L)).isInstanceOf(TaskNotFoundException.class);
 	}
+
+	@Test
+	void deveAtualizarTarefaComSucesso() {
+		// Arrange
+		when(taskRepository.findById(1L)).thenReturn(Optional.of(task));
+		when(taskRepository.save(any(Task.class))).thenReturn(task);
+
+		requestDto.setTitle("Título atualizado");
+
+		// Act
+		TaskResponseDto response = taskService.update(1L, requestDto);
+
+		// Assert
+		assertThat(response).isNotNull();
+		verify(taskRepository).save(any(Task.class));
+	}
+
+	@Test
+	void deveLancarExcecaoAoAtualizarTarefaInexistente() {
+		// Arrange
+		when(taskRepository.findById(99L)).thenReturn(Optional.empty());
+
+		// Assert + Act
+		assertThatThrownBy(() -> taskService.update(99L, requestDto)).isInstanceOf(TaskNotFoundException.class)
+				.hasMessageContaining("99");
+	}
 }
