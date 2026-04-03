@@ -34,6 +34,13 @@ public class DataLoader {
             task3.setPriority(Priority.LOW);
             task3.setCompleted(true);
             taskRepository.save(task3);
+            
+            Task task4 = new Task();
+            task4.setTitle("Revisar testes");
+            task4.setDescription("Estudar e revisar testes");
+            task4.setPriority(Priority.MEDIUM);
+            task4.setCompleted(false);
+            taskRepository.save(task4);
 
             System.out.println(">>> Dados carregados com sucesso!");
         };

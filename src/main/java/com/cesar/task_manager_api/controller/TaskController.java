@@ -44,8 +44,9 @@ public class TaskController {
 	// GET /tasks
 	@GetMapping
 	public ResponseEntity<Page<TaskResponseDto>> findAll(Pageable pageable) {
-	    return ResponseEntity.ok(taskService.findAll(pageable));
+		return ResponseEntity.ok(taskService.findAll(pageable));
 	}
+
 	// GET /tasks/{id}
 	@GetMapping("/{id}")
 	public ResponseEntity<TaskResponseDto> findById(@PathVariable Long id) {
