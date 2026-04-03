@@ -16,5 +16,5 @@ public interface TaskRepository extends JpaRepository<Task, Long>{
 	List<Task> findByCompleted(Boolean completed);
 	
 	List<Task> findByTitleContainingIgnoreCase(String title);
-	
+
 }
